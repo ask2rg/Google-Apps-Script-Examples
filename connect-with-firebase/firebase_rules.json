@@ -36,7 +36,12 @@
 // Allow Delete Only, Prevents Create and Update
   ".write": "data.exists() && !newData.exists()"
 
-
+// root_node : insert and update only  when 'status > user_active' is True
+// insert not allowed if 'active' key not present
+    "root_node": {
+      ".read": false,
+      ".write": "data.exists() && newData.exists() && root.child(\"status\").child(\"user_active\").val() === true"
+    },
 
 
 
@@ -49,6 +54,7 @@
       ".read": true,
       ".write": true
     }
+	  
     
   }
 }
