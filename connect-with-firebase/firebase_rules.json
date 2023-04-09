@@ -1,0 +1,55 @@
+// from client only, sever can read and write even set false
+// https://www.youtube.com/watch?v=dx_gkSb-Ch0
+// https://medium.com/@juliomacr/10-firebase-realtime-database-rule-templates-d4894a118a98
+// https://firebase.google.com/docs/database/security/get-started
+
+
+// allow read 	AND	 write (create, update, delete)
+  ".read": true,
+  ".write": true
+  
+// readonly 	OR	 prevent write (create, update, delete)
+  ".read": true,
+  ".write": false
+  
+// write only (create, update, delete) 	OR 	prevent read
+  ".read": false,
+	".write": true
+
+  
+// allow Delete or Update, but not an Create
+  ".write": "data.exists()"
+
+// allow Delete or Create, but not an Update
+  ".write": "!data.exists() || !newData.exists()"
+
+// allow  Create or Update, but not an Delete
+  ".write": "newData.exists()"
+
+
+// Allow Create Only, Prevents Delete or Update
+  ".write": "!data.exists()"
+
+// Allow Update Only, Prevents Create and Delete
+  ".write": "data.exists() && newData.exists()"
+
+// Allow Delete Only, Prevents Create and Update
+  ".write": "data.exists() && !newData.exists()"
+
+
+
+
+
+/* Example : */
+
+{
+  "rules": {
+      
+    "root_node":{
+      ".read": true,
+      ".write": true
+    }
+    
+  }
+}
+
