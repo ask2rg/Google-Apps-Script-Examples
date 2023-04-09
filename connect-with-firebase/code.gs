@@ -44,6 +44,74 @@ function demo(){
 
 
 
+function getData(){
+  init();
+  if (service.hasAccess()) {
+    // get data by single path - getData(path, optQueryParameters)
+    const path1 = "demo/data"
+    const demo_data  = baseToken.getData(path1)
+
+    // get data by multipale path
+    const path2 = "demo/links"
+    const path3 = "demo/type"
+    const demo_all_data = baseToken.getAllData([path1, path2, path3])
+
+    // get data by multipale path
+    const fb_db = baseToken.getData()
+
+    Logger.log(fb_db);
+  }
+}
+
+function setData(){
+  init();
+  if (service.hasAccess()) {
+    // set data by path - setData(path, data, optQueryParameters)
+    // if key or node not present create path/nodes and push data
+    // if key or node present then replace the parent node data with new data
+    const path1 = "demo/ndata"
+    const data1 = {
+      "fname" : "Ravi",
+      "lname" : "Agarwal",
+      "id" : 147
+    }
+    const set_data  = baseToken.setData(path1, data1)
+
+    Logger.log(set_data);
+  }
+}
+
+
+function updateData(){
+  init();
+  if (service.hasAccess()) {
+    // set data by path - updateData(path, data, optQueryParameters)
+    // if key or node not present create path/nodes and push data
+    // if key or node present then update the parent node data with new data
+    // modifying existing data and add new data,If some keys are not updated they will remain as before
+    const path1 = "demo/udata"
+    const data1 = {
+      "lname" : "Gupta",
+      "mob" : 9999988888
+    }
+    const update_data  = baseToken.updateData(path1, data1)
+
+    Logger.log(update_data);
+  }
+}
+
+function deleteData(){
+  init();
+  if (service.hasAccess()) {
+    // set data by path - removeData(path, optQueryParameters)
+    const path1 = "demo/type"  
+    const del_data  = baseToken.removeData(path1)
+
+    Logger.log(del_data);
+  }
+}
+
+
 
 
 
